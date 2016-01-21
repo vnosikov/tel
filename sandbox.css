@@ -1,0 +1,26 @@
+.container{
+	width: 1000px;
+	height: 500px;
+	border: 3px solid black;
+
+	position:relative;
+	top:100px;
+	left:350px;
+}
+
+.box{
+   width: 100px;
+   height: 100px;
+   border: 1px solid black;
+   border-radius: 25px;
+   line-height: 100px;
+   text-align: center;
+}
+
+.box .text{
+    vertical-align:middle;
+    display: inline-block;
+    line-height: 100%;
+
+    border: 1px dotted green;
+}
