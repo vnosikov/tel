@@ -24,3 +24,11 @@
 
     border: 1px dotted green;
 }
+
+.outer-box{
+	position:absolute;
+}
+
+.step{
+	top:250px;
+}
