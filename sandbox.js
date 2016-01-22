@@ -1,18 +1,24 @@
 $(document).ready(function(){
-	$('.element').draggable({
+	
+	createHandlersForElements($('.element'));
+
+	$('.canvas .text').draggable({
+		containment:"parent"
+	});
+
+});
+
+function createHandlersForElements(els){
+	els.draggable({
 		containment:$('.canvas')
 	});
 
-	$('.element').resizable({
+	els.resizable({
 		autoHide:true,
 		resize: textBlockResizeHandler
 	});	
 
-	$('.text').draggable({
-		containment:"parent"
-	});
-
-	$('.element').on("dblclick", editBox);
+	els.on("dblclick", editBox);
 
 	function editBox(){
 
@@ -69,4 +75,4 @@ $(document).ready(function(){
 			ui.size.height = minHeight;
 		}
 	}
-});
+}

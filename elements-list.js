@@ -29,7 +29,7 @@ $(document).ready(function(){
 	function copyTemplateToCanvas(event, ui){
 		if(checkIfIsInCanvas(ui.offset)){
 			var newCanvasElement = $("<div class='box element'>");
-			var elementText = $("<div class='text'>ABCDE</div>");
+			var elementText = $("<div class='text'>");
 			var html = ui.helper.find('.text').html();
 
 			elementText.html(html);
@@ -39,6 +39,12 @@ $(document).ready(function(){
 
 			newCanvasElement.offset(ui.offset);
 
+			//Adding handlers
+			createHandlersForElements(newCanvasElement);
+
+			elementText.draggable({
+				containment:"parent"
+			});
 		}
 
 		else console.log("Impossible to copy template outside of a canvas");
