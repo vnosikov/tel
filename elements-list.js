@@ -41,10 +41,6 @@ $(document).ready(function(){
 
 			//Adding handlers
 			createHandlersForElements(newCanvasElement);
-
-			elementText.draggable({
-				containment:"parent"
-			});
 		}
 
 		else console.log("Impossible to copy template outside of a canvas");

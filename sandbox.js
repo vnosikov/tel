@@ -1,11 +1,5 @@
 $(document).ready(function(){
-	
 	createHandlersForElements($('.element'));
-
-	$('.canvas .text').draggable({
-		containment:"parent"
-	});
-
 });
 
 function createHandlersForElements(els){
@@ -19,6 +13,10 @@ function createHandlersForElements(els){
 	});	
 
 	els.on("dblclick", editBox);
+
+	els.find('.text').draggable({
+		containment:"parent"
+	});
 
 	function editBox(){
 
