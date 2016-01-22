@@ -16,9 +16,6 @@ $(document).ready(function(){
 
 	function editBox(){
 
-		//Getting container
-		var $this = $(this)[0];
-
 		//Getting text element
 		var viewableText = $(this).find('.text')[0];
 
@@ -26,8 +23,9 @@ $(document).ready(function(){
 		var editableText = $("<textarea />");
 		editableText.val(viewableText.textContent);
 
-		editableText.css('height', $this.clientHeight*0.9);
-		editableText.css('width', $this.clientWidth*0.9);	
+		//By definition this == $(this)[0], so in this case it is a label, which we're going to edit
+		editableText.css('height', this.clientHeight*0.9);					
+		editableText.css('width', this.clientWidth*0.9);	
 		editableText.css('resize', 'none');	
 
 		//Replacing text element with editable text area
@@ -49,11 +47,12 @@ $(document).ready(function(){
 		    }
 		    if(viewableText.width()>parent.width()){
 		    	parent.width(viewableText.width()/0.9);
-		    }
+		    }		    
 
-		    parent.resizable({
-				autoHide:true,
-				resize: textBlockResizeHandler
+		    //adding text label drag handler
+
+		    $('.text').draggable({
+				containment:"parent"
 			});
 		});
 	}
@@ -62,6 +61,7 @@ $(document).ready(function(){
 		var innerText = ui.element[0].getElementsByClassName('text')[0];		
 		var minWidth = innerText.clientWidth + innerText.offsetLeft;
 		var minHeight = innerText.clientHeight + innerText.offsetTop;
+		
 		if(ui.size.width < minWidth) {
 			ui.size.width = minWidth;
 		}
