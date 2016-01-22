@@ -1,9 +1,9 @@
 $(document).ready(function(){
-	$('.box').draggable({
+	$('.element').draggable({
 		containment:$('.container')
 	});
 
-	$('.box').resizable({
+	$('.element').resizable({
 		autoHide:true,
 		resize: textBlockResizeHandler
 	});	
@@ -12,7 +12,7 @@ $(document).ready(function(){
 		containment:"parent"
 	});
 
-	$('.box').on("dblclick", editBox);
+	$('.element').on("dblclick", editBox);
 
 	function editBox(){
 

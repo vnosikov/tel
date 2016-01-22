@@ -1,11 +1,22 @@
+body{
+  margin-top: 100px;
+}
+
+.templates-list{
+  float:left;
+  width : 160px;
+  height: 500px;
+  border: 2px solid forestgreen ;
+  background-color: silver;
+  text-align: :center;
+  margin-left:50px;
+}
+
 .container{
 	width: 1000px;
 	height: 500px;
 	border: 3px solid black;
-
-	position:relative;
-	top:100px;
-	left:350px;
+  margin-left:300px;
 }
 
 .box{
@@ -14,6 +25,16 @@
    border: 1px solid black;
    border-radius: 25px;
    text-align: center;
+   background-color: white;
+}
+
+.element{
+  
+}
+
+.template{
+   margin-left: 20px;
+   margin-top: 10px;
 }
 
 .box .text{
