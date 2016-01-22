@@ -5,22 +5,12 @@ $(document).ready(function(){
 
 	$('.box').resizable({
 		autoHide:true,
-		resize: function(event, ui){
-			var innerText = ui.element[0].getElementsByClassName('text')[0];		
-			var minWidth = innerText.clientWidth + innerText.offsetLeft;
-			var minHeight = innerText.clientHeight + innerText.offsetTop;
-			if(ui.size.width < minWidth) {
-				ui.size.width = minWidth;
-			}
-			if(ui.size.height < minHeight) {
-				ui.size.height = minHeight;
-			}
-		}
+		resize: textBlockResizeHandler
 	});	
 
-	/*$('.text').draggable({
+	$('.text').draggable({
 		containment:"parent"
-	});*/
+	});
 
 	$('.box').on("dblclick", editBox);
 
@@ -63,18 +53,20 @@ $(document).ready(function(){
 
 		    parent.resizable({
 				autoHide:true,
-				resize: function(event, ui){
-					var innerText = ui.element[0].getElementsByClassName('text')[0];		
-					var minWidth = innerText.clientWidth + innerText.offsetLeft;
-					var minHeight = innerText.clientHeight + innerText.offsetTop;
-					if(ui.size.width < minWidth) {
-						ui.size.width = minWidth;
-					}
-					if(ui.size.height < minHeight) {
-						ui.size.height = minHeight;
-					}
-				}
+				resize: textBlockResizeHandler
 			});
 		});
+	}
+
+	function textBlockResizeHandler(event, ui){
+		var innerText = ui.element[0].getElementsByClassName('text')[0];		
+		var minWidth = innerText.clientWidth + innerText.offsetLeft;
+		var minHeight = innerText.clientHeight + innerText.offsetTop;
+		if(ui.size.width < minWidth) {
+			ui.size.width = minWidth;
+		}
+		if(ui.size.height < minHeight) {
+			ui.size.height = minHeight;
+		}
 	}
 });
