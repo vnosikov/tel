@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$('.element').draggable({
-		containment:$('.container')
+		containment:$('.canvas')
 	});
 
 	$('.element').resizable({

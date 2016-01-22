@@ -12,7 +12,7 @@ body{
   margin-left:50px;
 }
 
-.container{
+.canvas{
 	width: 1000px;
 	height: 500px;
 	border: 3px solid black;
@@ -28,15 +28,6 @@ body{
    background-color: white;
 }
 
-.element{
-  
-}
-
-.template{
-   margin-left: 20px;
-   margin-top: 10px;
-}
-
 .box .text{
     display: inline-block;
     border: 1px dotted green;
@@ -47,8 +38,24 @@ body{
 
 .outer-box{
 	position:absolute;
+  border: 1px dotted salmon;
+}
+
+.templates-list .outer-box{
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
 .step{
 	top:250px;
+}
+
+.greenmask{
+  background-color: green;
+  opacity:0.5;
+}
+
+.redmask{
+  background-color: red;
+  opacity:0.5; 
 }
