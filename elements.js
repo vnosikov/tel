@@ -6,8 +6,7 @@ $(document).ready(function(){
 function createHandlersForElements(els){
 	els.draggable({
 		drag: elementDragHandler,
-		stop: elementDropHandler,
-		start: elementStartDragHandler
+		revert: elementDropHandler
 	});
 
 	els.resizable({
@@ -86,28 +85,19 @@ function createHandlersForElements(els){
 		}
 	}
 
-	function elementDropHandler(event, ui){
-		if(!checkIfIsInCanvas(ui.offset)){
+	function elementDropHandler(){
+		if(!checkIfIsInCanvas($(this).offset())){
 			if(confirm("Really delete this element?")){
 				$(this).remove();
 			}
-
-			else{				
-				$(this).offset({top:originalOffsetY, left:originalOffsetX});				
+			else{		
+				//Smoothly return back
 				$(this).removeClass("redmask");
-
+				return true;
 			}
 		}
+		return false;
 	}
-
-	function elementStartDragHandler(event, ui){
-		originalOffsetX = ui.offset.left;
-		originalOffsetY = ui.offset.top;
-	}
-
-	//These variables is used for reverting drag-n-drop
-	var originalOffsetX, originalOffsetY;
-
 }
 
 var checkIfIsInCancas;
