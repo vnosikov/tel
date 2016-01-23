@@ -11,6 +11,7 @@ function createHandlersForElements(els){
 
 	els.resizable({
 		autoHide:true,
+		containment: $('.canvas'),
 		resize: textBlockResizeHandler
 	});	
 
