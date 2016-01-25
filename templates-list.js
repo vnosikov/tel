@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	var checkIfIsInCanvas = canvas().checkIfIsInCanvas;
+	var copyContent = content().copyContent;
 
 	$('.template').draggable({
 		helper: "clone",
@@ -25,15 +26,14 @@ $(document).ready(function(){
 		if(checkIfIsInCanvas(ui.offset)){
 			//Preparing new element
 			var newCanvasElement = $("<div class='box element'>");
-			var elementText = $("<div class='text'>");
-			var html = ui.helper.find('.text').html();
-
-			elementText.html(html);
+			
+			//Copying data from template
+			var element = copyContent(ui.helper.find('.content'));
 
 			//We need a container with an absolute position, otherwise changing sizes of one's element
-			//can lead to changing position of another. So 'outer-box' is a wrapper to avoid this
+			//can lead to changing position of another. This 'outer-box' is a wrapper to avoid this
 			var outerBox = $("<div class='outer-box'>");			
-			newCanvasElement.append(elementText);
+			newCanvasElement.append(element);
 			outerBox.append(newCanvasElement);
 			$('.canvas').append(outerBox);
 
