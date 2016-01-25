@@ -15,10 +15,23 @@ function createHandlersForElements(els){
 		resize: textBlockResizeHandler
 	});	
 
-	els.on("dblclick", editBox);
+	els.find('.text').on("dblclick", editBox);
 
 	els.find('.text').draggable({
 		containment:"parent"
+	});
+
+	els.find('.imageLoader').on('change', function(ev){
+		var f = ev.target.files[0];
+   		var fr = new FileReader();
+   		var image = $(this).parent().find('.image');
+    
+    	fr.onload = function(ev2) {
+        	console.dir(ev2);
+        	image.attr('src', ev2.target.result);
+    	};
+    
+    	fr.readAsDataURL(f);
 	});
 
 	function editBox(){

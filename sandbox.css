@@ -38,11 +38,20 @@ body{
     padding:5px;
 }
 
+.box .image{
+    width:80px;
+    height:100px;
+
+    position:relative;
+    padding:5px;
+}
+
 .outer-box{
 	position:absolute;
 }
 
 .templates-list .outer-box{
+  position: static;
   padding-left: 20px;
   padding-top: 10px;
 }
