@@ -17,7 +17,7 @@ function createHandlersForElements(els){
 
 	els.find('.text').on("dblclick", editBox);
 
-	els.find('.text').draggable({
+	els.find('.content').draggable({
 		containment:"parent"
 	});
 
@@ -114,6 +114,8 @@ function createHandlersForElements(els){
 	    	fr.onload = function(ev2) {
 	        	console.dir("File read");
 	        	image.attr('src', ev2.target.result);
+	        	fr.onload = null;
+	        	loader.off();
 	    	};
 	    
 	    	fr.readAsDataURL(f);		
