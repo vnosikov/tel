@@ -21,35 +21,25 @@ function createHandlersForElements(els){
 		containment:"parent"
 	});
 
-	els.find('.imageLoader').on('change', function(ev){
-		var f = ev.target.files[0];
-   		var fr = new FileReader();
-   		var image = $(this).parent().find('.image');
-    
-    	fr.onload = function(ev2) {
-        	console.dir(ev2);
-        	image.attr('src', ev2.target.result);
-    	};
-    
-    	fr.readAsDataURL(f);
-	});
+	els.find('.image').on('dblclick', loadImage);
 
 	function editBox(){
 
 		//Getting text element
-		var viewableText = $(this).find('.text')[0];
+		var viewableText = $(this);
+		var element = $(this).parent()[0];
 
 		//creating and preparing editable field
 		var editableText = $("<textarea />");
-		editableText.val(viewableText.textContent);
+		editableText.html(viewableText.html());
 
 		//By definition this == $(this)[0], so in this case it is a label, which we're going to edit
-		editableText.css('height', this.clientHeight*0.9);					
-		editableText.css('width', this.clientWidth*0.9);	
+		editableText.css('height', element.clientHeight*0.9);					
+		editableText.css('width', element.clientWidth*0.9);	
 		editableText.css('resize', 'none');	
 
 		//Replacing text element with editable text area
-		$(this).find('.text').replaceWith(editableText);
+		viewableText.replaceWith(editableText);
 	    editableText.focus();		
 
 	    //Setting reverse replace after editing
@@ -111,6 +101,25 @@ function createHandlersForElements(els){
 			}
 		}
 		return false;
+	}
+
+	function loadImage(){
+		var image = $(this).find('img');
+		var loader = $('#imageLoader');
+
+		loader.on('change', function(ev){
+			var f = ev.target.files[0];
+	   		var fr = new FileReader();	   		
+	    
+	    	fr.onload = function(ev2) {
+	        	console.dir("File read");
+	        	image.attr('src', ev2.target.result);
+	    	};
+	    
+	    	fr.readAsDataURL(f);		
+		});
+		
+		loader[0].click();					
 	}
 }
 
