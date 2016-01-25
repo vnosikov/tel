@@ -51,6 +51,7 @@ function content(){
 				break;
 			case "image":
 				var img = $("<img src='/'>");
+				img.attr('src', oldElem.find('img').attr('src'));
 				newElem.append(img);
 				break;
 			default:

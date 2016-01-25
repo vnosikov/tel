@@ -5,7 +5,6 @@ TODO & KNOWN ISSUES
 3) Need to make possible z-axis movement
 4) It will be nice to have a feature of changing block's color
 5) Templates in the list on the left have to be aligned, their contents should be centered
-6) We need also some default image
-7) Images src should be copied
 8) Polymorph code in content.js is simply very bad
 9) Template list should be scrollable
+10) Global variable in element.js
