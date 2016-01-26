@@ -5,7 +5,6 @@ $(document).ready(function(){
 function createHandlersForElements(els){
 
 	checkIfIsInCanvas = canvas().checkIfIsInCanvas;
-	getEditHandler = content().getEditHandler
 
 	els.draggable({
 		drag: elementDragHandler,
@@ -22,15 +21,14 @@ function createHandlersForElements(els){
 		containment:"parent"
 	});
 
-	els.find('.content').resizable({
+	els.find('.image').resizable({
 		autoHide:true,
 		containment:"parent"
 	});
 
 	els.find('.content').on('dblclick', function(){		
-		//Editing handler will be assigned depending of a content class
-		var classNames = $(this).attr("class").split(' ');
-		getEditHandler(classNames, this);
+		var handler = getContentClass($(this)).getEditHandler();
+		handler.call(this);
 	});
 
 	function textBlockResizeHandler(event, ui){

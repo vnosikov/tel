@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
 	var checkIfIsInCanvas = canvas().checkIfIsInCanvas;
-	var copyContent = content().copyContent;
 
 	$('.template').draggable({
 		helper: "clone",
@@ -28,7 +27,8 @@ $(document).ready(function(){
 			var newCanvasElement = $("<div class='box element'>");
 			
 			//Copying data from template
-			var element = copyContent(ui.helper.find('.content'));
+			var cloneFunction = getContentClass(ui.helper.find('.content')).cloneContent;
+			var element = cloneFunction(ui.helper.find('.content'));
 
 			//We need a container with an absolute position, otherwise changing sizes of one's element
 			//can lead to changing position of another. This 'outer-box' is a wrapper to avoid this

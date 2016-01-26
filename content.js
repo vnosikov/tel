@@ -1,73 +1,21 @@
-function content(){
+function Content(){	
+}
 
-	var supportedTypes = ["text", "image"];
+Content.prototype.getEditHandler = function(){throw Error("geEditHandler function must be implemented");}
+Content.prototype.cloneContent = function(content){throw Error("geEditHandler function must be implemented");}
 
-	return{
-		getEditHandler: function(classNames, context){
-			for(var i=0; i<classNames.length; i++){
-				if(supportedTypes.indexOf(classNames[i]) != -1){
-					var handler = getEditHandlerForType(classNames[i]);
-					//We have to save our context
-					handler.call(context);
-					break;
-				}
-			}
-		},
+function TextContent(){}
+TextContent.prototype = Object.create(Content.prototype);
 
-		copyContent: function(content){
-			var classNames = content.attr("class").split(' ');
-			for(var i=0; i<classNames.length; i++){
-				if(supportedTypes.indexOf(classNames[i]) != -1){
-					var element = $("<div class='content " + classNames[i] + "'>");
-					copyContentToNewElement(classNames[i], content, element);
-					return element;
-					break;
-				}
-			}
-		}
-
-	};
-
-
-	function getEditHandlerForType(type){
-		switch(type){
-			case "text":
-				return editBox;
-				break;
-			case "image":
-				return loadImage;
-				break;
-			default:
-				throw Error("No handler for content named: " + type);
-				break;
-		}
-	}
-
-	function copyContentToNewElement(type, oldElem, newElem){
-		switch(type){
-			case "text":
-				var html = oldElem.html();
-				newElem.html(html);				
-				break;
-			case "image":
-				var img = $("<img src='/'>");
-				img.attr('src', oldElem.find('img').attr('src'));
-				newElem.append(img);
-				break;
-			default:
-				throw Error("No handler for content named: " + type);
-				break;
-		}
-	}
-
-	function editBox(){	
+TextContent.prototype.getEditHandler = function(){
+	return function editBox(){
 		//Getting text element
 		var viewableText = $(this);
 		var element = $(this).parent()[0];
 
 		//creating and preparing editable field
 		var editableText = $("<textarea />");
-		editableText.html(viewableText.html());
+		editableText.html(viewableText.text());
 
 		editableText.css('height', element.clientHeight*0.9);					
 		editableText.css('width', element.clientWidth*0.9);	
@@ -99,9 +47,23 @@ function content(){
 				containment:"parent"
 			});
 		});
-	};
+	}
+}
 
-	function loadImage(){
+TextContent.prototype.cloneContent = function(content){
+	var element = $("<div class='content text'>");
+	var html = content.text();
+	element.html(html);			
+
+	return element;
+}
+
+
+function ImageContent(){}
+ImageContent.prototype = Object.create(Content.prototype);
+
+ImageContent.prototype.getEditHandler = function(){
+	return function(){
 		var image = $(this).find('img');
 		//This is a hidden input field that we use for loading images
 		//Check html file for details
@@ -128,5 +90,31 @@ function content(){
 		//Imitating input button click - as far as I understand, that's the only way to load something
 		loader[0].click();					
 	}
+}
 
+ImageContent.prototype.cloneContent = function(content){
+	var element = $("<div class='content image'>");
+	var img = $("<img src='/'>");
+	img.attr('src', content.find('img').attr('src'));
+	element.append(img);
+	return element;
+}
+
+function getContentClass(element){
+	var supportedTypes = ["text", "image"];
+	var classNames = element.attr("class").split(' ');
+	for(var i=0; i<classNames.length; i++){		
+		switch(classNames[i]){
+			case "text":
+				return new TextContent();
+				break;
+			case "image":
+				return new ImageContent();
+				break;
+			default:
+				//continue seatch
+				break;
+		}
+	}	
+	throw Error("Element's classes do not correspond to any supported ContentClass");
 }
