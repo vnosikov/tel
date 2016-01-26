@@ -68,4 +68,4 @@ function createHandlersForElements(els){
 	}
 }
 
-var checkIfIsInCanvas, getEditHandler;
+var checkIfIsInCanvas;

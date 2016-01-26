@@ -4,12 +4,14 @@ body{
 
 .templates-list{
   float:left;
-  width : 160px;
+  width : 170px;
   height: 500px;
   border: 2px solid forestgreen ;
   background-color: silver;
   text-align: :center;
   margin-left:50px;
+  overflow-y:auto;
+  overflow-x: hidden;
 }
 
 .canvas{
@@ -64,8 +66,8 @@ body{
 
 .templates-list .outer-box{
   position: static;
-  padding-left: 20px;
-  padding-top: 10px;
+  padding-left: 10px;
+  padding-top: 20px;
 }
 
 .canvas .outer-box{
