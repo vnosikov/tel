@@ -23,14 +23,19 @@ $(document).ready(function(){
 
 	function copyTemplateToCanvas(event, ui){
 		if(checkIfIsInCanvas(ui.offset)){
+			//Preparing new element
 			var newCanvasElement = $("<div class='box element'>");
-			var elementText = $("<div class='text'>");
-			var html = ui.helper.find('.text').html();
+			
+			//Copying data from template
+			var cloneFunction = getContentClass(ui.helper.find('.content')).cloneContent;
+			var element = cloneFunction(ui.helper.find('.content'));
 
-			elementText.html(html);
-
-			newCanvasElement.append(elementText);
-			$('.canvas').append(newCanvasElement);
+			//We need a container with an absolute position, otherwise changing sizes of one's element
+			//can lead to changing position of another. This 'outer-box' is a wrapper to avoid this
+			var outerBox = $("<div class='outer-box'>");			
+			newCanvasElement.append(element);
+			outerBox.append(newCanvasElement);
+			$('.canvas').append(outerBox);
 
 			newCanvasElement.offset(ui.offset);
 

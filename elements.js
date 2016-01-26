@@ -1,9 +1,11 @@
 $(document).ready(function(){
-	createHandlersForElements($('.element'));
-	checkIfIsInCanvas = canvas().checkIfIsInCanvas;
+	createHandlersForElements($('.element'));	
 });
 
 function createHandlersForElements(els){
+
+	checkIfIsInCanvas = canvas().checkIfIsInCanvas;
+
 	els.draggable({
 		drag: elementDragHandler,
 		revert: elementDropHandler
@@ -15,57 +17,22 @@ function createHandlersForElements(els){
 		resize: textBlockResizeHandler
 	});	
 
-	els.on("dblclick", editBox);
-
-	els.find('.text').draggable({
+	els.find('.content').draggable({
 		containment:"parent"
 	});
 
-	function editBox(){
+	els.find('.image').resizable({
+		autoHide:true,
+		containment:"parent"
+	});
 
-		//Getting text element
-		var viewableText = $(this).find('.text')[0];
-
-		//creating and preparing editable field
-		var editableText = $("<textarea />");
-		editableText.val(viewableText.textContent);
-
-		//By definition this == $(this)[0], so in this case it is a label, which we're going to edit
-		editableText.css('height', this.clientHeight*0.9);					
-		editableText.css('width', this.clientWidth*0.9);	
-		editableText.css('resize', 'none');	
-
-		//Replacing text element with editable text area
-		$(this).find('.text').replaceWith(editableText);
-	    editableText.focus();		
-
-	    //Setting reverse replace after editing
-	    $(editableText).blur(function() {	    
-		    var html = $(this).val();
-		    var viewableText = $("<div class='text'>");
-		    viewableText.html(html);	    
-		    $(this).replaceWith(viewableText);
-		    viewableText.on('dblclick', editBox);
-
-		    //resizing parent box if necessary
-		    var parent = viewableText.parent();
-		    if(viewableText.height()>parent.height()){
-		    	parent.height(viewableText.height()/0.9);
-		    }
-		    if(viewableText.width()>parent.width()){
-		    	parent.width(viewableText.width()/0.9);
-		    }		    
-
-		    //adding text label drag handler
-
-		    $('.text').draggable({
-				containment:"parent"
-			});
-		});
-	}
+	els.find('.content').on('dblclick', function(){		
+		var handler = getContentClass($(this)).getEditHandler();
+		handler.call(this);
+	});
 
 	function textBlockResizeHandler(event, ui){
-		var innerText = ui.element[0].getElementsByClassName('text')[0];		
+		var innerText = ui.element[0].getElementsByClassName('content')[0];		
 		var minWidth = innerText.clientWidth + innerText.offsetLeft;
 		var minHeight = innerText.clientHeight + innerText.offsetTop;
 		
@@ -101,4 +68,4 @@ function createHandlersForElements(els){
 	}
 }
 
-var checkIfIsInCancas;
+var checkIfIsInCanvas, getEditHandler;
