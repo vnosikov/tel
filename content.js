@@ -41,7 +41,7 @@ function TextContent(){
 						containment:"parent"
 					});
 				});
-			}
+			};
 		},
 
 		cloneContent: function(content){

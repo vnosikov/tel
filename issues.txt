@@ -4,5 +4,4 @@ TODO & KNOWN ISSUES
 2) If text content block is extremely small, element resizing can move it outside of a box - maybe it also happens with small images
 3) Need to make possible z-axis movement
 4) It will be nice to have a feature of changing block's color
-9) Template list should be scrollable
 10) Global variable in element.js
