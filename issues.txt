@@ -1,9 +1,8 @@
 TODO & KNOWN ISSUES
 
 1) Sometimes text editing can lead to error, which doesn't have any visible consequences - need to check if it reproduces now
-2) If text content block is extremely small, element resizing can move it outside of a box - maybe also happens with small images
+2) If text content block is extremely small, element resizing can move it outside of a box - maybe it also happens with small images
 3) Need to make possible z-axis movement
 4) It will be nice to have a feature of changing block's color
-8) Polymorph code in content.js [is simply very bad] is much better but still can be improved
 9) Template list should be scrollable
 10) Global variable in element.js
